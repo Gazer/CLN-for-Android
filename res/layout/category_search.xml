@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+  Club La Nacion for Android by 3DGLabs
+  Copyright (C) 2011  3DGLabs <info@3dglabs.com.ar>
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+ 
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+ 
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" android:paddingRight="20dip" android:paddingLeft="20dip" android:background="@drawable/background">
+
+
+    
+
+
+
+<ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/title_search_category" android:id="@+id/header" android:layout_margin="10dip"></ImageView>
+<Spinner android:layout_below="@+id/header" android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/category" android:prompt="@string/category_prompt"></Spinner>
+<Spinner android:layout_below="@+id/category" android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/subcategory" android:prompt="@string/subcategory_prompt"></Spinner>
+<EditText android:layout_below="@+id/subcategory" android:layout_height="wrap_content" android:layout_width="fill_parent" android:hint="Palabra clave" android:id="@+id/query"></EditText>
+
+  <Button
+    style="@style/PinkButton"
+    android:layout_below="@+id/query"
+    android:layout_height="wrap_content"
+    android:id="@+id/search"
+    android:text="Buscar"
+    android:layout_width="fill_parent"
+    />
+
+</RelativeLayout>

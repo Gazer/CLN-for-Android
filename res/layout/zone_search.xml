@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+  Club La Nacion for Android by 3DGLabs
+  Copyright (C) 2011  3DGLabs <info@3dglabs.com.ar>
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+ 
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+ 
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingRight="20dip"
+    android:paddingLeft="20dip"
+    android:background="@drawable/background"
+    >
+
+   <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/title_search_zone" android:id="@+id/header" android:layout_margin="10dip"></ImageView>
+   <Spinner android:layout_below="@+id/header" android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/state" android:prompt="@string/zone_prompt"></Spinner>
+   <Spinner android:layout_height="wrap_content" android:layout_below="@+id/state" android:id="@+id/zone" android:layout_width="fill_parent"></Spinner><EditText android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/address" android:layout_below="@+id/zone" android:hint="Dirección (Ej: Arenales 1242)"></EditText>
+
+  <Button
+    style="@style/PinkButton"
+    android:layout_below="@+id/address"
+    android:id="@+id/find"
+    android:text="Buscar"
+    />
+</RelativeLayout>

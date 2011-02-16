@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+  Club La Nacion for Android by 3DGLabs
+  Copyright (C) 2011  3DGLabs <info@3dglabs.com.ar>
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+ 
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+ 
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+      package="ar.com.labs3dg.android.cln"
+      android:versionCode="11" android:versionName="1.0.1">
+    <application android:icon="@drawable/icon" android:label="@string/app_name">
+        <uses-library android:name="com.google.android.maps" />
+        <activity android:name=".activities.Init"
+                  android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activities.CardSelector"></activity>
+        <activity android:name=".activities.MapsActivity"></activity>
+        <activity android:name=".activities.SearchType"></activity>
+        <activity android:name=".activities.FilterType"></activity>
+        <activity android:name=".activities.ZoneSearch"></activity>
+        <activity android:name=".activities.CategorySearch"></activity>
+        <activity android:name=".activities.VenueActivity"></activity>
+        <activity android:name=".activities.VenuesActivity"></activity>
+        <activity android:name=".activities.VenuesMapActivity"></activity>
+    </application>
+    <uses-sdk android:minSdkVersion="3" />
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
+    <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
+</manifest> 
