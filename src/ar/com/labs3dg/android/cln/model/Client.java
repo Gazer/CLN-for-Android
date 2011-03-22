@@ -33,7 +33,6 @@ import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.util.Log;
-import ar.com.labs3dg.android.cln.LookupPosition;
 
 public class Client
 {
@@ -166,9 +165,9 @@ public class Client
 	};
 	static public String[] Empty = {};
 
-	public LookupPosition getDireccion(String state, String zone, String address)
+	public List<Address> getDireccion(String state, String zone, String address)
 	{
-		LookupPosition location = null;
+		List<Address> locations = new ArrayList<Address>();
 
 		String url = "http://serviciosclub.lnol.com.ar/codamation/getDirecciones/"+address.replace(" ", "%20")+"/"+zone.replace(" ", "%20")+"/"+state.replace(" ", "%20")+"/";
 		String data = doRequest(new HttpGet(url));
@@ -176,15 +175,13 @@ public class Client
 		ResponseParser r = new ResponseParser(data, false);
 
 		if (r.is_ok) {
-			String[] a = r.result.get(0).get(0).split("\\{#\\}");
 
-			double lat = Double.parseDouble(a[1].replace(",", "."));
-			double lon = Double.parseDouble(a[0].replace(",", "."));
-
-			location = new LookupPosition(lat, lon);
+			for(List<String> list: r.result) {
+				locations.add(Address.Parse(list.get(0)));
+			}
 		}
 
-		return location;
+		return locations;
 	}
 
 	public List<Venue> getHighlited(String card)

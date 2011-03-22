@@ -18,9 +18,13 @@ package ar.com.labs3dg.android.cln.activities;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import java.util.List;
+
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -35,6 +39,7 @@ import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 import ar.com.labs3dg.android.cln.LookupPosition;
 import ar.com.labs3dg.android.cln.R;
+import ar.com.labs3dg.android.cln.model.Address;
 import ar.com.labs3dg.android.cln.model.Client;
 
 public class ZoneSearch extends Activity implements OnClickListener
@@ -43,7 +48,7 @@ public class ZoneSearch extends Activity implements OnClickListener
 	Spinner zone;
 	EditText address;
 
-	class GetLocationTask extends AsyncTask<String, Void, LookupPosition>
+	class GetLocationTask extends AsyncTask<String, Void, List<Address> >
 	{
 		private Dialog dialog;
 
@@ -54,7 +59,7 @@ public class ZoneSearch extends Activity implements OnClickListener
 		}
 
 		@Override
-		protected LookupPosition doInBackground(String... arg0)
+		protected List<Address> doInBackground(String... arg0)
 		{
 			Client c = new Client();
 
@@ -62,14 +67,15 @@ public class ZoneSearch extends Activity implements OnClickListener
 		}
 
 		@Override
-		protected void onPostExecute(LookupPosition result)
+		protected void onPostExecute(List<Address> result)
 		{
 			dialog.dismiss();
-			if (result != null) {
-				Intent intent = new Intent(getApplicationContext(), FilterType.class);
-				intent.putExtra("latitude", result.getLatitude());
-				intent.putExtra("longitude", result.getLongitude());
-				startActivity(intent);
+			if (result.size() > 0) {
+				if (result.size() == 1) {
+					showFilter(result.get(0).getPosition());
+				} else {
+					showList(result);
+				}
 			} else {
 				Toast.makeText(getApplicationContext(), "El servidor no responde o la dirección no existe. Reintente.", Toast.LENGTH_SHORT).show();
 			}
@@ -181,4 +187,32 @@ public class ZoneSearch extends Activity implements OnClickListener
 
 		return txt;
 	}
+
+	private void showFilter(LookupPosition position)
+	{
+		Intent intent = new Intent(getApplicationContext(), FilterType.class);
+		intent.putExtra("latitude", position.getLatitude());
+		intent.putExtra("longitude", position.getLongitude());
+		startActivity(intent);
+	}
+
+	public void showList(final List<Address> result)
+	{
+		final String[] items = new String[result.size()];
+		for (int i = 0; i < result.size(); i++) {
+			items[i] = result.get(i).toString();
+		}
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle("Seleccione Dirección :");
+		builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int item) {
+				showFilter(result.get(item).getPosition());
+			}
+		});
+
+		AlertDialog alert = builder.create();
+		alert.show();
+	}
+
 }
