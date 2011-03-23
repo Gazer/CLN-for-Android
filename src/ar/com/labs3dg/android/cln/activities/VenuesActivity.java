@@ -33,6 +33,8 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -184,6 +186,33 @@ public class VenuesActivity extends ListActivity implements OnClickListener
 	{
 		currentPage++;
 		new LoadVenues().execute();
+	}
+
+	private static final int MENU_HOME = 1;
+	private static final int MENU_MAPVIEW = 2;
+
+	@Override
+	public boolean onCreateOptionsMenu( final Menu menu )
+	{
+		menu.add(0, MENU_MAPVIEW, 0, "Ver Mapa").setIcon(android.R.drawable.ic_menu_mapmode);
+		menu.add(0, MENU_HOME, 0, "Inicio").setIcon(R.drawable.ic_menu_home);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(final MenuItem item)
+	{
+		switch (item.getItemId()) {
+		case MENU_HOME:
+			Intent homeIntent = new Intent(this, SearchType.class);
+			homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(homeIntent);
+			return true;
+		case MENU_MAPVIEW:
+			finish();
+			return true;
+		}
+		return false;
 	}
 }
 

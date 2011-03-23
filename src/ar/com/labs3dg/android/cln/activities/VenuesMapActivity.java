@@ -163,8 +163,8 @@ public class VenuesMapActivity extends MapActivity
 	@Override
 	public boolean onCreateOptionsMenu( final Menu menu )
 	{
-		menu.add(0, MENU_LISTVIEW, 0, "Ver Lista").setIcon(android.R.drawable.ic_menu_manage);
-		menu.add(0, MENU_HOME, 0, "Inicio").setIcon(R.drawable.home);
+		menu.add(0, MENU_LISTVIEW, 0, "Ver Lista").setIcon(R.drawable.ic_menu_show_list);
+		menu.add(0, MENU_HOME, 0, "Inicio").setIcon(R.drawable.ic_menu_home);
 		return true;
 	}
 
