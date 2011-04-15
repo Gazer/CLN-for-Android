@@ -50,11 +50,13 @@ public class ZoneSearch extends Activity implements OnClickListener
 
 	class GetLocationTask extends AsyncTask<String, Void, List<Address> >
 	{
+		private boolean hasAddress;
 		private Dialog dialog;
 
 		@Override
 		protected void onPreExecute()
 		{
+			hasAddress = false;
 			dialog = ProgressDialog.show(ZoneSearch.this, "", "Espere...", true);
 		}
 
@@ -63,7 +65,26 @@ public class ZoneSearch extends Activity implements OnClickListener
 		{
 			Client c = new Client();
 
-			return c.getDireccion(arg0[0], arg0[1], arg0[2]);
+			if ((arg0[2] == null) || (arg0[2].equals(""))) {
+				hasAddress = false;
+			} else {
+				hasAddress = true;
+			}
+
+			return c.getDireccion(cleanUp(arg0[0]), cleanUp(arg0[1]), cleanUp(arg0[2]));
+		}
+
+		private String cleanUp(String s)
+		{
+			return s.toLowerCase().
+			replace("á", "a").
+			replace("é", "e").
+			replace("í", "i").
+			replace("ó", "o").
+			replace("ú", "u").
+			replace("ñ", "n").
+			replace("ü", "u").
+			replaceAll("[^\\p{ASCII}]", "");
 		}
 
 		@Override
@@ -71,7 +92,7 @@ public class ZoneSearch extends Activity implements OnClickListener
 		{
 			dialog.dismiss();
 			if (result.size() > 0) {
-				if (result.size() == 1) {
+				if ((result.size() == 1) || (!hasAddress)) {
 					showFilter(result.get(0).getPosition());
 				} else {
 					showList(result);
@@ -139,7 +160,7 @@ public class ZoneSearch extends Activity implements OnClickListener
 	@Override
 	public void onClick(View arg0)
 	{
-		new GetLocationTask().execute(getState(), getZone(), getAddress());
+		new GetLocationTask().execute(getState() + " Argentina", getZone(), getAddress());
 	}
 
 	private String getAddress()

@@ -44,7 +44,7 @@ public class Client
 	static public List<Category> Categories = null;
 
 	static public String[] States = {
-		"Capital Federal",
+		"Ciudad de Buenos Aires",
 		"Gran Buenos Aires",
 		"Lugares de Veraneo",
 		"Córdoba"
